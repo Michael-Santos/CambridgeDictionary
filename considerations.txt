@@ -1,0 +1,4 @@
+I think we also should have a cool cambridge crawler for C#.
+
+I'm basing on this other project (TypeScript)
+https://github.com/DevSnowflake/camb-dict
