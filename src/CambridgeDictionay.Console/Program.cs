@@ -1,7 +1,6 @@
 ﻿using CambridgeDictionary.Cli;
 using CambridgeDictionary.Cli.Extensions;
 using Microsoft.Extensions.DependencyInjection;
-using System;
 
 namespace CambridgeDictionay.Cli.Test
 {
@@ -15,9 +14,9 @@ namespace CambridgeDictionay.Cli.Test
             var serviceProvider = serviceCollection.BuildServiceProvider();
             var cambridgeDictionary = serviceProvider.GetService<ICambridgeDictionaryCli>();
 
-            var word = "put";
+            var word = "pull someone's leg";
 
-            cambridgeDictionary.GetMeaning(word);
+            var result = cambridgeDictionary.GetMeaning(word);
 
         }
     }

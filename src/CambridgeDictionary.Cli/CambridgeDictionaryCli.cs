@@ -1,43 +1,32 @@
-﻿using ScrapySharp.Network;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web;
 
 namespace CambridgeDictionary.Cli
 {
     public class CambridgeDictionaryCli : ICambridgeDictionaryCli
     {
-        const string urlBase = "https://dictionary.cambridge.org/search/direct/?datasetsearch=english&q=";
+        private readonly IScrapper _scrapper;
+
+        public CambridgeDictionaryCli(IScrapper scrapper)
+        {
+            _scrapper = scrapper;
+        }
 
         public Meaning GetMeaning(string word)
         {
-            var url = urlBase + HttpUtility.UrlEncode(word);
+            var page = _scrapper.GetPage(word);
+            var headline = _scrapper.GetHeadline(page);
+            var headlineFormatted = FormatHeadline(headline);
 
-            var browser = new ScrapingBrowser
-            {
-                Encoding = Encoding.UTF8
-            };
-
-            var homePage = browser.NavigateToPage(new Uri(url));
-
-            var html = homePage.Html;
-            var headlineNode = html.SelectSingleNode("//meta[@itemprop='headline']");
-
-            var headline = headlineNode.GetAttributeValue("content", "");
-            var headlineHandled = FormatHeadline(headline);
-
-            return  new Meaning
+            return new Meaning
             {
                 Word = word,
-                HeadLine = headlineHandled,
-                Raw = homePage.RawResponse.ToString()
+                HeadLine = headlineFormatted,
+                Raw = page.InnerHtml
             };
         }
 
-        private string FormatHeadline(string headline)
+        private static string FormatHeadline(string headline)
         {
             var definitions = headline.Split("definition: 1. ");
             if (definitions.Length > 1) {

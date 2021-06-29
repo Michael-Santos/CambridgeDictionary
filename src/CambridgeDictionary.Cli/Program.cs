@@ -1,9 +1,4 @@
-﻿using ScrapySharp.Network;
-using System;
-using System.Text;
-using System.Web;
-
-namespace CambridgeDictionary.Cli
+﻿namespace CambridgeDictionary.Cli
 {
     class Program
     {
@@ -11,8 +6,7 @@ namespace CambridgeDictionary.Cli
         {
             var word = "pull someone's leg";
             
-            var cambridge = new CambridgeDictionaryCli();
-            var meaning = cambridge.GetMeaning(word);
+            
         }
     }
 }
