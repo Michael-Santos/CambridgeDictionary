@@ -20,10 +20,21 @@ namespace CambridgeDictionary.Cli
             var matchedWord = _scrapper.GetWord(page);
             var formattedWord = FormatWord(matchedWord);
 
+            
+            //var meaningEntries = GetMeaningEntries
+
+            // TODO
+            // Was word find?
+            //      -> Scrappy
+            // Else
+            //      -> Similar words
+
+
+
             return new Meaning
             {
                 Word = formattedWord,
-                HeadLine = headlineFormatted,
+                Headline = headlineFormatted,
                 Raw = page.InnerHtml
             };
         }

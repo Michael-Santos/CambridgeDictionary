@@ -1,6 +1,7 @@
 ﻿using HtmlAgilityPack;
 using ScrapySharp.Network;
 using System;
+using System.Collections.Generic;
 using System.Web;
 
 namespace CambridgeDictionary.Cli
@@ -38,6 +39,21 @@ namespace CambridgeDictionary.Cli
             }
 
             return node.InnerHtml;
+        }
+
+        public void GetEntries(HtmlNode page)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void GetPhonetics(HtmlNode page)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<string> GetSimilarWords(HtmlNode page)
+        {
+            throw new NotImplementedException();
         }
     }
 }

@@ -10,7 +10,7 @@
         /// <summary>
         /// Usually gets the first meaning available. It's fetched from a meta attribute insted of reading all the page
         /// </summary>
-        public string HeadLine { get; set; }
+        public string Headline { get; set; }
 
         /// <summary>
         /// The raw meaning page

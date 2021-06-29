@@ -9,7 +9,7 @@ namespace CambridgeDictionay.Cli.Test
         static void Main(string[] args)
         {
             var serviceCollection = new ServiceCollection();
-            CambridgeDictionaryExtensions.ConfigureServices(serviceCollection);
+            serviceCollection.AddCambridgeDictionary();
 
             var serviceProvider = serviceCollection.BuildServiceProvider();
             var cambridgeDictionary = serviceProvider.GetService<ICambridgeDictionaryCli>();

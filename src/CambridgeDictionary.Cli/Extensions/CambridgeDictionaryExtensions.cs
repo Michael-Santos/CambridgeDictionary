@@ -6,14 +6,16 @@ namespace CambridgeDictionary.Cli.Extensions
 {
     public static class CambridgeDictionaryExtensions
     {
-        public static void ConfigureServices(this IServiceCollection serviceCollection)
+        public static IServiceCollection AddCambridgeDictionary(this IServiceCollection services)
         {
-            serviceCollection.AddScoped<ICambridgeDictionaryCli, CambridgeDictionaryCli>();
-            serviceCollection.AddScoped<IScrapper, Scrapper>();
-            serviceCollection.AddScoped(x => new ScrapingBrowser()
+            services.AddScoped<ICambridgeDictionaryCli, CambridgeDictionaryCli>();
+            services.AddScoped<IScrapper, Scrapper>();
+            services.AddScoped(x => new ScrapingBrowser()
             {
                 Encoding = Encoding.UTF8
             });
+
+            return services;
         }
     }
 }
