@@ -9,7 +9,10 @@ namespace CambridgeDictionary.Cli
     {
         static void Main(string[] args)
         {
+            var word = "pull someone's leg";
             
+            var cambridge = new CambridgeDictionaryCli();
+            var meaning = cambridge.GetMeaning(word);
         }
     }
 }

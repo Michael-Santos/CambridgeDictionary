@@ -16,8 +16,10 @@ namespace CambridgeDictionary.Cli
         {
             var url = urlBase + HttpUtility.UrlEncode(word);
 
-            var browser = new ScrapingBrowser();
-            browser.Encoding = Encoding.UTF8;
+            var browser = new ScrapingBrowser
+            {
+                Encoding = Encoding.UTF8
+            };
 
             var homePage = browser.NavigateToPage(new Uri(url));
 
@@ -25,13 +27,26 @@ namespace CambridgeDictionary.Cli
             var headlineNode = html.SelectSingleNode("//meta[@itemprop='headline']");
 
             var headline = headlineNode.GetAttributeValue("content", "");
+            var headlineHandled = FormatHeadline(headline);
 
             return  new Meaning
             {
                 Word = word,
-                HeadLine = headline,
+                HeadLine = headlineHandled,
                 Raw = homePage.RawResponse.ToString()
             };
+        }
+
+        private string FormatHeadline(string headline)
+        {
+            var definitions = headline.Split("definition: 1. ");
+            if (definitions.Length > 1) {
+                return definitions[1].Split(" 2. ")[0];
+            }
+
+            definitions = headline.Split("definition: ");
+
+            return definitions[1];
         }
 
         public IEnumerable<string> GetSimilarWords(string word)
