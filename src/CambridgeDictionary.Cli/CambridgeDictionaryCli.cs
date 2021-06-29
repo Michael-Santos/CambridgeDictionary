@@ -17,10 +17,12 @@ namespace CambridgeDictionary.Cli
             var page = _scrapper.GetPage(word);
             var headline = _scrapper.GetHeadline(page);
             var headlineFormatted = FormatHeadline(headline);
+            var matchedWord = _scrapper.GetWord(page);
+            var formattedWord = FormatWord(matchedWord);
 
             return new Meaning
             {
-                Word = word,
+                Word = formattedWord,
                 HeadLine = headlineFormatted,
                 Raw = page.InnerHtml
             };
@@ -35,7 +37,15 @@ namespace CambridgeDictionary.Cli
 
             definitions = headline.Split("definition: ");
 
-            return definitions[1];
+            return definitions[1].Replace(": . Learn more.", "");
+        }
+
+        private static string FormatWord(string word)
+        {
+            word = word.Replace("<span class=\"obj dobj\">", "");
+            word = word.Replace("</span>", "");
+            word = word.Replace("\"", "");
+            return word;
         }
 
         public IEnumerable<string> GetSimilarWords(string word)

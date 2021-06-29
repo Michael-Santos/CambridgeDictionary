@@ -17,7 +17,6 @@ namespace CambridgeDictionay.Cli.Test
             var word = "pull someone's leg";
 
             var result = cambridgeDictionary.GetMeaning(word);
-
         }
     }
 }

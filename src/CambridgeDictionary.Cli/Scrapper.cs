@@ -30,7 +30,14 @@ namespace CambridgeDictionary.Cli
 
         public string GetWord(HtmlNode page)
         {
-            throw new NotImplementedException();
+            var node = page.SelectSingleNode("//div[@class='di-title']/span");
+
+            if (node == null)
+            {
+                node = page.SelectSingleNode("//div[@class='di-title']/h2/b");
+            }
+
+            return node.InnerHtml;
         }
     }
 }
