@@ -20,7 +20,7 @@ namespace CambridgeDictionary.Cli
             var matchedWord = _scrapper.GetWord(page);
             var formattedWord = FormatWord(matchedWord);
 
-            
+
             //var meaningEntries = GetMeaningEntries
 
             // TODO
@@ -29,6 +29,9 @@ namespace CambridgeDictionary.Cli
             // Else
             //      -> Similar words
 
+            var entries = _scrapper.GetEntries(page);
+            var similarWords = _scrapper.GetSimilarWords(page);
+            
 
 
             return new Meaning
