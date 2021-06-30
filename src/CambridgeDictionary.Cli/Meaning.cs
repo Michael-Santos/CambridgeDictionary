@@ -10,14 +10,14 @@ namespace CambridgeDictionary.Cli
         public string Word { get; set; }
 
         /// <summary>
-        /// Usually gets the first meaning available. It's fetched from a meta attribute insted of reading all the page
+        /// It's the definition fetched from a meta attribute insted of reading all the page
         /// </summary>
         public string Headline { get; set; }
 
         /// <summary>
         /// All the possible meanings with examples and guide word whether it's available
         /// </summary>
-        public IEnumerable<EntrySet> EntrieSets { get; set; }
+        public IEnumerable<EntrySet> EntrySets { get; set; }
 
         /// <summary>
         /// Similar words sugestion when the searched word wasn't found

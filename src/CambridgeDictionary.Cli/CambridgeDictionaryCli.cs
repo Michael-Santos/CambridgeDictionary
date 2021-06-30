@@ -35,7 +35,7 @@ namespace CambridgeDictionary.Cli
                 Word = wordFromSite ?? word,
                 Headline = headlineFormatted,
                 SimilarWords = similarWords,
-                EntrieSets = entries,
+                EntrySets = entries,
                 Raw = page.InnerHtml
             };
         }
