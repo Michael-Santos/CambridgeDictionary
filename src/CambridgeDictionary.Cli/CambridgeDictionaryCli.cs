@@ -16,6 +16,7 @@ namespace CambridgeDictionary.Cli
             string headlineFormatted = null;
             string wordFromSite = null;
             IEnumerable<string> similarWords = null;
+            Phonetics phonetics = null;
 
             var page = _scrapper.GetPage(word);
 
@@ -24,6 +25,7 @@ namespace CambridgeDictionary.Cli
             {
                 word = GetWord(page);
                 headlineFormatted = GetHeadline(page);
+                phonetics = _scrapper.GetPhonetics(page);
             }
             else
             {
@@ -34,8 +36,9 @@ namespace CambridgeDictionary.Cli
             {
                 Word = wordFromSite ?? word,
                 Headline = headlineFormatted,
-                SimilarWords = similarWords,
+                Phonetics = phonetics,
                 EntrySets = entries,
+                SimilarWords = similarWords,
                 Raw = page.InnerHtml
             };
         }
@@ -68,8 +71,6 @@ namespace CambridgeDictionary.Cli
 
         private static string FormatWord(string word)
         {
-            word = word.Replace("<span class=\"obj dobj\">", "");
-            word = word.Replace("</span>", "");
             word = word.Replace("\"", "");
             return word;
         }

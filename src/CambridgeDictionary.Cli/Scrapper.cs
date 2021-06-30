@@ -39,7 +39,7 @@ namespace CambridgeDictionary.Cli
                 node = page.SelectSingleNode("//div[@class='di-title']/h2/b");
             }
 
-            return node.InnerHtml;
+            return node.InnerText;
         }
 
         public IEnumerable<EntrySet> GetEntries(HtmlNode page)
@@ -192,9 +192,32 @@ namespace CambridgeDictionary.Cli
             return similarWordsNodes.Select(x => x.FirstChild.InnerHtml);
         }
 
-        public void GetPhonetics(HtmlNode page)
+        public Phonetics GetPhonetics(HtmlNode page)
         {
-            throw new NotImplementedException();
+            var ukPhonetics = ExtractPhonetics(page, "uk");
+            var usPhonetics = ExtractPhonetics(page, "us");
+
+            if (ukPhonetics == null && usPhonetics == null)
+            {
+                return null;
+            }
+
+            return new Phonetics
+            {
+                UK = ukPhonetics,
+                US = usPhonetics
+            };
+        }
+
+        private IEnumerable<string> ExtractPhonetics(HtmlNode page, string region)
+        {
+            var phoneticDpronNodes = page.Descendants("span").Where(x => x.HasClass(region) && x.HasClass("dpron-i"));
+
+            return phoneticDpronNodes.Select(
+                x => x.Descendants("span")
+                .Where(y => y.HasClass("ipa") && y.HasClass("dipa"))
+                .FirstOrDefault()?.InnerText)
+                .Distinct();
         }
     }
 }
