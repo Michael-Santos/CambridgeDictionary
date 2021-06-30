@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace CambridgeDictionary.Cli
 {
@@ -14,22 +13,45 @@ namespace CambridgeDictionary.Cli
 
         public Meaning GetMeaning(string word)
         {
+            string headlineFormatted = null;
+            string wordFromSite = null;
+            IEnumerable<string> similarWords = null;
+
             var page = _scrapper.GetPage(word);
-            var headline = _scrapper.GetHeadline(page);
-            var headlineFormatted = FormatHeadline(headline);
-            var matchedWord = _scrapper.GetWord(page);
-            var formattedWord = FormatWord(matchedWord);
 
             var entries = _scrapper.GetEntries(page);
-            var similarWords = _scrapper.GetSimilarWords(page);
-            
+            if (entries != null)
+            {
+                word = GetWord(page);
+                headlineFormatted = GetHeadline(page);
+            }
+            else
+            {
+                similarWords = _scrapper.GetSimilarWords(page);
+            }
+
             return new Meaning
             {
-                Word = formattedWord,
+                Word = wordFromSite ?? word,
                 Headline = headlineFormatted,
+                SimilarWords = similarWords,
                 EntrieSets = entries,
                 Raw = page.InnerHtml
             };
+        }
+
+        private string GetWord(HtmlAgilityPack.HtmlNode page)
+        {
+            var matchedWord = _scrapper.GetWord(page);
+            var formattedWord = FormatWord(matchedWord);
+            return formattedWord;
+        }
+
+        private string GetHeadline(HtmlAgilityPack.HtmlNode page)
+        {
+            var headline = _scrapper.GetHeadline(page);
+            var headlineFormatted = FormatHeadline(headline);
+            return headlineFormatted;
         }
 
         private static string FormatHeadline(string headline)
@@ -50,11 +72,6 @@ namespace CambridgeDictionary.Cli
             word = word.Replace("</span>", "");
             word = word.Replace("\"", "");
             return word;
-        }
-
-        public IEnumerable<string> GetSimilarWords(string word)
-        {
-            throw new NotImplementedException();
         }
     }
 }

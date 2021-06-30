@@ -46,7 +46,7 @@ namespace CambridgeDictionary.Cli
         {
             var nodes = page.SelectNodes("//div[@class='pr dictionary']");
 
-            if (nodes.Count == 0)
+            if (nodes == null)
             {
                 return null;
             }
@@ -179,14 +179,17 @@ namespace CambridgeDictionary.Cli
 
         public IEnumerable<string> GetSimilarWords(HtmlNode page)
         {
-            var node = page.SelectSingleNode("//p[contains(text(), 'We have these words')]");
+            var node = page.Descendants("p")
+                .Where(x => x.InnerText.Contains("We have these words"))
+                .FirstOrDefault();
 
             if (node == null)
             {
                 return null;
             }
 
-            throw new NotImplementedException();
+            var similarWordsNodes = node.NextSibling.NextSibling.Descendants("span");
+            return similarWordsNodes.Select(x => x.FirstChild.InnerHtml);
         }
 
         public void GetPhonetics(HtmlNode page)

@@ -10,6 +10,5 @@ namespace CambridgeDictionary.Cli
         /// <param name="word">It's the word to be searched.</param>
         /// <returns>The information about the word on the dictionary</returns>
         Meaning GetMeaning(string word);
-        IEnumerable<string> GetSimilarWords(string word);
     }
 }

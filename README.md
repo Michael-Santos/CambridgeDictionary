@@ -9,8 +9,9 @@ The main purpose of this project is provide a simple and conssitent lib to query
 
 # Features I mind to implement these following features
 - [x] Meanings
+- [x] Similar words sugestion
 - [ ] Phonetics
-- [ ] Similar words sugestion
+
 
 
 # Setup
