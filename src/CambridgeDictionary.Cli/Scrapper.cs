@@ -58,11 +58,12 @@ namespace CambridgeDictionary.Cli
             {
                 if (hasMultiplesMeanings)
                 {
-                    throw new NotImplementedException();
+                    entrySet.AddRange(ExtractMultiplesDefinitionsNode(node));
                 }
-
-                var definition = ExtractSingleDefinitionNode(node);
-                entrySet.Add(definition);
+                else
+                {
+                    entrySet.Add(ExtractSingleDefinitionNode(node));
+                }
             }
 
             return entrySet;
@@ -77,15 +78,103 @@ namespace CambridgeDictionary.Cli
         {
             var entry = new Entry();
             
-            var idiomBlockNode = page.SelectSingleNode("//div[@class='def ddef_d db']");
-            entry.Definition = idiomBlockNode.InnerText;
+            var definitionNode = page.SelectSingleNode("//div[@class='def ddef_d db']");
+            entry.Definition = definitionNode.InnerText;
             entry.Examples = page.SelectNodes("//div[@class='examp dexamp']").Select(x => x.InnerText);
 
             var entrySet = new EntrySet();
             entrySet.Entries = new List<Entry>();
-            entrySet.Entries.Append(entry);
+            entrySet.Entries = entrySet.Entries.Append(entry);
 
             return entrySet;
+        }
+
+        private IEnumerable<EntrySet> ExtractMultiplesDefinitionsNode(HtmlNode page)
+        {
+            var entrySetList = new List<EntrySet>();
+            
+            var entryBodyNodeElementNodes = page.Descendants().Where(x => x.HasClass("entry-body__el"));
+            
+            foreach (var entryBodyNodeElementNode in entryBodyNodeElementNodes)
+            {
+                var type = ExtractType(entryBodyNodeElementNode);
+
+                var dsenseNodes = entryBodyNodeElementNode.Descendants().Where(x => x.HasClass("dsense"));
+                foreach (var dsense in dsenseNodes)
+                {
+                    var guideWord = ExtractGuideWord(dsense);
+                    var entries = ExtractEntries(dsense, type);
+
+                    var entrySet = new EntrySet
+                    {
+                        GuideWord = guideWord,
+                        Entries = entries
+                    };
+
+                    entrySetList.Add(entrySet);
+                }
+            }
+
+            return entrySetList;
+        }
+
+        private string ExtractType(HtmlNode node)
+        {
+            var typeNode = node.Descendants()
+                    .Where(x => x.HasClass("pos") && x.HasClass("dpos"))
+                    .First();
+
+            return typeNode.InnerText;
+        }
+
+        private string ExtractGuideWord(HtmlNode node)
+        {
+            var guideWordNode = node.Descendants()
+                    .Where(x => x.HasClass("guideword"))
+                    .FirstOrDefault();
+
+            return guideWordNode?.InnerText;
+        }
+
+        private IEnumerable<Entry> ExtractEntries(HtmlNode node, string type)
+        {
+            var entryNodes = node.Descendants()
+                .Where(x => x.HasClass("def-block"));
+
+            var entries = new List<Entry>();
+            foreach (var entryNode in entryNodes)
+            {
+                var definition = ExtractDefinition(entryNode);
+                var examples = ExtractExamples(entryNode);
+
+                var entry = new Entry
+                {
+                    Type = type,
+                    Definition = definition,
+                    Examples = examples
+                };
+                
+                entries.Add(entry);
+            }
+
+            return entries;
+        }
+
+        private string ExtractDefinition(HtmlNode node)
+        {
+            var definitionNode = node.Descendants()
+                    .Where(x => x.HasClass("def") && x.HasClass("ddef_d"))
+                    .First();
+
+            return definitionNode.InnerText;
+        }
+
+        private IEnumerable<string> ExtractExamples(HtmlNode node)
+        {
+            var examplesNodes = node.Descendants()
+                .Where(x => x.HasClass("examp"));
+
+            return examplesNodes.Select(x => x.InnerText);
         }
 
         public IEnumerable<string> GetSimilarWords(HtmlNode page)
