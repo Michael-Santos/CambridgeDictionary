@@ -5,25 +5,30 @@ Porting a crawler to CSharp
 [ScrapySharp](https://github.com/rflechner/ScrapySharp)
 
 # Purpose of this project
-The main purpose of this project is provide a simple and conssitent lib to query the meaning of words on cambridge dictionary
+The main purpose of this project is to provide a simple and consistent lib to query the meaning of words on the Cambridge dictionary
 
-# Features I mind to implement
+# Features I mind implement
 - [x] Meanings
 - [x] Similar words sugestion
-- [ ] Phonetics
+- [x] Phonetics
 
+As I had implemented all the basics features I'm going to enhance the results, performance, and documentation in the next few days to get an alfa version ASAP.
 
+# Next Steps
+ - [ ] Release alfa version
+ - [ ] Setup a simple CI/CD mechanism on Github
+ - [ ] Unit Tests
 
 # Setup
-The lib isn't still available on Nuget.org :worried::weary::sweat_smile:, but I mind to keep the usage as simples as possible.
+The lib isn't still available on Nuget.org :worried::weary::sweat_smile:, but I mind keeping the usage as simples as possible.
 
-You just need add it to you service collection as follow:
+You just need to add it to your service collection as follow:
 
 ````C#
 services.AddCambridgeDictionary();
 ````
 
-After that the lib is already available to use.
+After that, the lib would be available to use.
 
 # Usage
 
@@ -45,7 +50,7 @@ The Meaning response looks like this:
 ```
 {
     string Word - Word you searched
-    string Headline - The definition fetched from a meta attribute insted of reading all the page
+    string Headline - The definition fetched from a meta attribute instead of reading all the page
     IEnumerable<EntrySet> EntrySets - All the possible meanings with examples and guide word whether it's available
     {
         string GuideWord - Word that helps you find the right meaning when a word has more than one meaning
@@ -56,7 +61,7 @@ The Meaning response looks like this:
             IEnumerable<string> Examples - Examples of sentences using the searched word
         }
     }
-    IEnumerable<string> SimilarWords - Similar words sugestion when the searched word wasn't found
+    IEnumerable<string> SimilarWords - Similar words suggestion when the searched word wasn't found
     string Raw - The raw meaning page
 }
 
