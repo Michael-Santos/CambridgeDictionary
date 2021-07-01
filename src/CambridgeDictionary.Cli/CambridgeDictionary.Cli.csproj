@@ -1,13 +1,36 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <TargetFramework>net5.0</TargetFramework>
+    <RepositoryUrl>https://github.com/Michael-Santos/CambridgeDictionary</RepositoryUrl>
+    <Authors>MrBroccoli - Michael Santos</Authors>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <ApplicationIcon />
+    <StartupObject />
+    <Version>1.0.1-alpha</Version>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>Cli, Dictionary, English, Scrapper</PackageTags>
+    <PackageProjectUrl>https://github.com/Michael-Santos/CambridgeDictionary</PackageProjectUrl>
+    <Description>Simple and consistent lib to query the meaning of words on the Cambridge dictionary
+For more information: https://github.com/Michael-Santos/CambridgeDictionary</Description>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageReleaseNotes>New Features
+
+ - Method GetMeaning(string word)</PackageReleaseNotes>
+    <PackageId>MrBroccoli.CambridgeDictionary.Cli</PackageId>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="5.0.0" />
     <PackageReference Include="ScrapySharp" Version="3.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>

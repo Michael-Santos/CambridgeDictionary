@@ -20,12 +20,16 @@ As I had implemented all the basics features I'm going to enhance the results, p
  - [ ] Unit Tests
 
 # Setup
-The lib isn't still available on Nuget.org :worried::weary::sweat_smile:, but I mind keeping the usage as simples as possible.
+The lib is finally available on Nuget: (https://www.nuget.org/packages/MrBroccoli.CambridgeDictionary.Cli)[https://www.nuget.org/packages/MrBroccoli.CambridgeDictionary.Cli]
 
 You just need to add it to your service collection as follow:
 
 ````C#
-services.AddCambridgeDictionary();
+var serviceCollection = new ServiceCollection();
+serviceCollection.AddCambridgeDictionary();
+
+var serviceProvider = serviceCollection.BuildServiceProvider();
+var cambridgeDictionary = serviceProvider.GetService<ICambridgeDictionaryCli>();
 ````
 
 After that, the lib would be available to use.
