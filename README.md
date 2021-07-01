@@ -1,11 +1,8 @@
 # CambridgeDictionary :book::books:
-Porting a crawler to CSharp
+A simple and consistent lib to query the meaning of words on the Cambridge dictionary
 
 # Dependencies
 [ScrapySharp](https://github.com/rflechner/ScrapySharp)
-
-# Purpose of this project
-The main purpose of this project is to provide a simple and consistent lib to query the meaning of words on the Cambridge dictionary
 
 # Features I mind implement
 - [x] Meanings
@@ -15,16 +12,21 @@ The main purpose of this project is to provide a simple and consistent lib to qu
 As I had implemented all the basics features I'm going to enhance the results, performance, and documentation in the next few days to get an alfa version ASAP.
 
 # Next Steps
- - [ ] Release alfa version
+ - [x] Release alfa version
  - [ ] Setup a simple CI/CD mechanism on Github
  - [ ] Unit Tests
 
-# Setup
-The lib is finally available on Nuget: (https://www.nuget.org/packages/MrBroccoli.CambridgeDictionary.Cli)[https://www.nuget.org/packages/MrBroccoli.CambridgeDictionary.Cli]
+# Nuget
+The lib is finally available on Nuget: https://www.nuget.org/packages/MrBroccoli.CambridgeDictionary.Cli
 
+# Setup
 You just need to add it to your service collection as follow:
 
 ````C#
+using CambridgeDictionary.Cli.Extensions;
+
+--
+
 var serviceCollection = new ServiceCollection();
 serviceCollection.AddCambridgeDictionary();
 
@@ -73,4 +75,7 @@ The Meaning response looks like this:
 
 
 # Links
-I'm lurking this other project implemented with TypeScript: [DevSnowflake/camb-dict](https://github.com/DevSnowflake/camb-dict)
+I'm lurking this other two project:
+
+ - [DevSnowflake/camb-dict](https://github.com/DevSnowflake/camb-dict) - project implemented with TypeScript
+ - [qas612820704/cambridge-dictionary](https://github.com/qas612820704/cambridge-dictionary) - project implemented with JavaScript
