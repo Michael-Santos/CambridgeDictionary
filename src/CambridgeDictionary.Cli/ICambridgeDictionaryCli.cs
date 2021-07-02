@@ -9,6 +9,6 @@ namespace CambridgeDictionary.Cli
         /// </summary>
         /// <param name="word">It's the word to be searched.</param>
         /// <returns>The information about the word on the dictionary</returns>
-        Meaning GetEntry(string word);
+        EntrySet GetEntry(string word);
     }
 }

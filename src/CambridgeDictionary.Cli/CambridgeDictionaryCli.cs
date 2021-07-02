@@ -22,33 +22,27 @@ namespace CambridgeDictionary.Cli
             _scrapper = scrapper;
         }
 
-        public Meaning GetEntry(string word)
+        public EntrySet GetEntry(string word)
         {
-            string headlineFormatted = null;
-            string wordFromSite = null;
+            string headword = null;
             IEnumerable<string> similarWords = null;
-            Ipa phonetics = null;
 
             var page = _scrapper.GetPage(word);
 
-            var entries = _scrapper.GetSenses(page);
+            var entries = _scrapper.GetEntries(page);
             if (entries != null)
             {
-                word = GetWord(page);
-                headlineFormatted = GetHeadline(page);
-                phonetics = _scrapper.GetPhonetics(page);
+                headword = GetWord(page);
             }
             else
             {
                 similarWords = _scrapper.GetSimilarWords(page);
             }
 
-            return new Meaning
+            return new EntrySet
             {
-                Word = wordFromSite ?? word,
-                Headline = headlineFormatted,
-                Phonetics = phonetics,
-                EntrySets = entries,
+                Headword = headword ?? word,
+                Entries = entries,
                 SimilarWords = similarWords,
                 Raw = page.InnerHtml
             };

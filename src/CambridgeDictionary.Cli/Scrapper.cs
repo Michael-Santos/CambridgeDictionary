@@ -42,7 +42,7 @@ namespace CambridgeDictionary.Cli
             return node.InnerText;
         }
 
-        public IEnumerable<EntrySet> GetSenses(HtmlNode page)
+        public IEnumerable<Entry> GetEntries(HtmlNode page)
         {
             var nodes = page.SelectNodes("//div[@class='pr dictionary']");
 
@@ -50,92 +50,68 @@ namespace CambridgeDictionary.Cli
             {
                 return null;
             }
-
-            var hasMultipleSenses = HasMultipleSenses(nodes[0]);
             
-            var entrySet = new List<EntrySet>();
+            var entrySet = new List<Entry>();
 
-            var senses = new List<Sense>();
             foreach (var node in nodes)
             {
-                if (hasMultipleSenses)
-                {
-                    entrySet.AddRange(ExtractMultipleSenses(node));
-                }
-                else
-                {
-                    senses.Add(ExtractSingleSense(node));
-                }
+                entrySet.AddRange(ExtractEntries(node));
             }
 
             return entrySet;
         }
 
-        private static bool HasMultipleSenses(HtmlNode page)
+        private static bool HasMultipleEntries(HtmlNode page)
         {
             return page.SelectSingleNode("//div[@class='entry']") != null;
         }
 
-        private EntrySet ExtractSingleSenseOld(HtmlNode page)
+        private IEnumerable<Entry> ExtractEntries(HtmlNode page)
         {
-            var entry = new Entry();
+            var entries = new List<Entry>();
+
+            var hasMulipleEntries = HasMultipleEntries(page);
             
-            var definitionNode = page.SelectSingleNode("//div[@class='def ddef_d db']");
-            entry.Definition = definitionNode.InnerText;
-            entry.Examples = page.SelectNodes("//div[@class='examp dexamp']").Select(x => x.InnerText);
+            IEnumerable<HtmlNode> entryBodyNodeElementNodes = GetEntryBlockElement(page, hasMulipleEntries);
 
-            var entrySet = new EntrySet();
-            entrySet.Entries = new List<Entry>();
-            entrySet.Entries = entrySet.Entries.Append(entry);
-
-            return entrySet;
-        }
-
-        private Sense ExtractSingleSense(HtmlNode page)
-        {
-            var definition = new Definition();
-
-            var definitionNode = page.SelectSingleNode("//div[@class='def ddef_d db']");
-            definition.Text = definitionNode.InnerText;
-            definition.Examples = page.SelectNodes("//div[@class='examp dexamp']").Select(x => x.InnerText);
-
-            var definitions = new List<Definition>();
-            definitions.Add(definition);
-
-            var sense = new Sense();
-            sense.Type = "phrasel verb/other";
-            sense.Definitions = definitions;
-
-            return sense;
-        }
-
-        private IEnumerable<EntrySet> ExtractMultipleSenses(HtmlNode page)
-        {
-            var entrySetList = new List<EntrySet>();
-            
-            var entryBodyNodeElementNodes = page.Descendants().Where(x => x.HasClass("entry-body__el"));
-            
             foreach (var entryBodyNodeElementNode in entryBodyNodeElementNodes)
             {
-                var type = ExtractType(entryBodyNodeElementNode);
+                var entry = new Entry();
+
+                entry.Type = hasMulipleEntries ? ExtractType(entryBodyNodeElementNode) : "phrasal verb/other";
+                entry.Ipa = hasMulipleEntries ? GetPhonetics(entryBodyNodeElementNode) : new Ipa();
+
+                var senses = new List<Sense>();
 
                 var dsenseNodes = entryBodyNodeElementNode.Descendants().Where(x => x.HasClass("dsense"));
                 foreach (var dsense in dsenseNodes)
                 {
                     var guideWord = ExtractGuideWord(dsense);
-                    var entries = ExtractEntries(dsense, type);
+                    var definitions = ExtractDefinitions(dsense);
 
-                    var entrySet = new EntrySet
+                    var sense = new Sense
                     {
                         GuideWord = guideWord,
-                        Entries = entries
+                        Definitions = definitions
                     };
 
-                    entrySetList.Add(entrySet);
+                    senses.Add(sense);
                 }
+                entry.Senses = senses;
+                entries.Add(entry);
             }
 
-            return entrySetList;
+            return entries;
+        }
+
+        private static IEnumerable<HtmlNode> GetEntryBlockElement(HtmlNode page, bool hasMulipleEntries)
+        {
+            Func<HtmlNode, bool> elementClasses = hasMulipleEntries ?
+                            x => x.HasClass("entry-body__el") :
+                            x => x.HasClass("idiom-block") && x.HasClass("pr");
+
+            var entryBodyNodeElementNodes = page.Descendants().Where(elementClasses);
+            return entryBodyNodeElementNodes;
         }
 
         private string ExtractType(HtmlNode node)
@@ -153,31 +129,36 @@ namespace CambridgeDictionary.Cli
                     .Where(x => x.HasClass("guideword"))
                     .FirstOrDefault();
 
-            return guideWordNode?.InnerText;
+            if (guideWordNode == null)
+            {
+                return null;
+            }
+
+            return guideWordNode.InnerText.Trim(' ', '\n', '(', ')');
         }
 
-        private IEnumerable<Entry> ExtractEntries(HtmlNode node, string type)
+        private IEnumerable<Definition> ExtractDefinitions(HtmlNode node)
         {
+            var definitions = new List<Definition>();
+
             var entryNodes = node.Descendants()
                 .Where(x => x.HasClass("def-block"));
 
-            var entries = new List<Entry>();
             foreach (var entryNode in entryNodes)
             {
                 var definition = ExtractDefinition(entryNode);
                 var examples = ExtractExamples(entryNode);
 
-                var entry = new Entry
+                var entry = new Definition
                 {
-                    Type = type,
-                    Definition = definition,
+                    Text = definition,
                     Examples = examples
                 };
-                
-                entries.Add(entry);
+
+                definitions.Add(entry);
             }
 
-            return entries;
+            return definitions;
         }
 
         private string ExtractDefinition(HtmlNode node)
@@ -236,8 +217,7 @@ namespace CambridgeDictionary.Cli
             return phoneticDpronNodes.Select(
                 x => x.Descendants("span")
                 .Where(y => y.HasClass("ipa") && y.HasClass("dipa"))
-                .FirstOrDefault()?.InnerText)
-                .Distinct();
+                .FirstOrDefault()?.InnerText);
         }
     }
 }

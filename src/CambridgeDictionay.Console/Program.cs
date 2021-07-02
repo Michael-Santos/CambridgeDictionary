@@ -26,7 +26,7 @@ namespace CambridgeDictionay.Cli.Test
             //var result3 = cambridgeDictionary.GetMeaning(word3);
             //var result4 = cambridgeDictionary.GetMeaning(word4);
 
-            var word = "at the expense of someone";
+            var word = "pull";
             var result = cambridgeDictionary.GetEntry(word);
 
 
