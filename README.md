@@ -1,13 +1,16 @@
 # CambridgeDictionary :book::books:
 A simple and consistent lib to query the meaning of words on the Cambridge dictionary
 
+
 # Dependencies
 [ScrapySharp](https://github.com/rflechner/ScrapySharp)
+
 
 # Features I mind implement
 - [x] Meanings
 - [x] Similar words sugestion
 - [x] Phonetics
+
 
 As I had implemented all the basics features but I'm going to enhance the results, performance, and documentation in the next few days to get an alfa version ASAP.
 
@@ -16,14 +19,16 @@ As I had implemented all the basics features but I'm going to enhance the result
  - [?] Setup a simple CI/CD mechanism on Github - (It's only building when something is pushed to master branch at the moment)
  - [ ] Unit Tests
 
+
 # Nuget
 The lib is finally available on Nuget: https://www.nuget.org/packages/MrBroccoli.CambridgeDictionary.Cli
+
 
 # Setup
 
 ## DI
 
-You can set the lib to your DI container collection as follow and then pass the ```ICambridgeDictionaryCli``` interface in the constructor of your services
+You can setup the lib in your DI container as follow and then pass the ```ICambridgeDictionaryCli``` interface in the constructor of your services
 
 ```C#
 using CambridgeDictionary.Cli.Extensions;
@@ -47,10 +52,21 @@ public class Service {
     }
 
     ...
-    
+
 }
+```
 
 
+## Without DI
+
+It's just needed to import the lib and then create a new instance of the class ```CambridgeDictionaryCli```.
+
+```C#
+using CambridgeDictionary.Cli;
+
+...
+
+var cambridgeDictionary = new CambridgeDictionaryCli();
 ```
 
 
@@ -67,7 +83,8 @@ Currently, the lib only has an method called GetMeaning:
 Meaning GetMeaning(string word);
 ````
 
-# Response
+
+# Return
 
 The Meaning response looks like this:
 
@@ -101,3 +118,4 @@ I'm lurking this other two project:
 This link help me to understand the dictionary anatomy:
 
  - [Macmillandictionary - Dictionary anatomy](https://www.macmillandictionary.com/learn/dictionary-entry.html)
+
