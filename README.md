@@ -1,5 +1,5 @@
 # CambridgeDictionary :book::books:
-A simple and consistent lib to query the meaning of words on the Cambridge dictionary
+A simple and consistent lib to query the meaning of words on the [Cambridge dictionary](https://dictionary.cambridge.org/).
 
 
 # Dependencies
