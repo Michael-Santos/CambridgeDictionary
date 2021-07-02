@@ -8,7 +8,10 @@ namespace CambridgeDictionary.Cli.Extensions
     {
         public static IServiceCollection AddCambridgeDictionary(this IServiceCollection services)
         {
-            services.AddScoped<ICambridgeDictionaryCli, CambridgeDictionaryCli>();
+            services.AddScoped<ICambridgeDictionaryCli, CambridgeDictionaryCli>(serviceProvider => {
+                var dependency = serviceProvider.GetRequiredService<IScrapper>();
+                return new CambridgeDictionaryCli(dependency);
+            });
             services.AddScoped<IScrapper, Scrapper>();
             services.AddScoped(x => new ScrapingBrowser()
             {

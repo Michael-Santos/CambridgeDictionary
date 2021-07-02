@@ -9,32 +9,50 @@ A simple and consistent lib to query the meaning of words on the Cambridge dicti
 - [x] Similar words sugestion
 - [x] Phonetics
 
-As I had implemented all the basics features I'm going to enhance the results, performance, and documentation in the next few days to get an alfa version ASAP.
+As I had implemented all the basics features but I'm going to enhance the results, performance, and documentation in the next few days to get an alfa version ASAP.
 
 # Next Steps
  - [x] Release alfa version
- - [ ] Setup a simple CI/CD mechanism on Github
+ - [?] Setup a simple CI/CD mechanism on Github - (It's only building when something is pushed to master branch at the moment)
  - [ ] Unit Tests
 
 # Nuget
 The lib is finally available on Nuget: https://www.nuget.org/packages/MrBroccoli.CambridgeDictionary.Cli
 
 # Setup
-You just need to add it to your service collection as follow:
 
-````C#
+## DI
+
+You can set the lib to your DI container collection as follow and then pass the ```ICambridgeDictionaryCli``` interface in the constructor of your services
+
+```C#
 using CambridgeDictionary.Cli.Extensions;
 
---
+...
 
-var serviceCollection = new ServiceCollection();
 serviceCollection.AddCambridgeDictionary();
+```
 
-var serviceProvider = serviceCollection.BuildServiceProvider();
-var cambridgeDictionary = serviceProvider.GetService<ICambridgeDictionaryCli>();
-````
+```C#
+using CambridgeDictionary.Cli;
 
-After that, the lib would be available to use.
+...
+
+public class Service {
+    
+    private readonly _cambridgeDictionaryCli;
+
+    public YourService(ICambridgeDictionaryCli cambridgeDictionaryCli) {
+        _cambridgeDictionaryCli = cambridgeDictionaryCli;
+    }
+
+    ...
+    
+}
+
+
+```
+
 
 # Usage
 
@@ -79,3 +97,7 @@ I'm lurking this other two project:
 
  - [DevSnowflake/camb-dict](https://github.com/DevSnowflake/camb-dict) - project implemented with TypeScript
  - [qas612820704/cambridge-dictionary](https://github.com/qas612820704/cambridge-dictionary) - project implemented with JavaScript
+
+This link help me to understand the dictionary anatomy:
+
+ - [Macmillandictionary - Dictionary anatomy](https://www.macmillandictionary.com/learn/dictionary-entry.html)

@@ -1,10 +1,21 @@
-﻿using System.Collections.Generic;
+﻿using ScrapySharp.Network;
+using System.Collections.Generic;
+using System.Text;
 
 namespace CambridgeDictionary.Cli
 {
     public class CambridgeDictionaryCli : ICambridgeDictionaryCli
     {
         private readonly IScrapper _scrapper;
+
+        public CambridgeDictionaryCli()
+        {
+            var scrapingBrowser = new ScrapingBrowser()
+            {
+                Encoding = Encoding.UTF8
+            };
+            _scrapper = new Scrapper(scrapingBrowser);
+        }
 
         public CambridgeDictionaryCli(IScrapper scrapper)
         {

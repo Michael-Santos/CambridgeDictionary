@@ -9,23 +9,29 @@ namespace CambridgeDictionay.Cli.Test
         static void Main(string[] args)
         {
             var serviceCollection = new ServiceCollection();
+
+
             serviceCollection.AddCambridgeDictionary();
 
             var serviceProvider = serviceCollection.BuildServiceProvider();
             var cambridgeDictionary = serviceProvider.GetService<ICambridgeDictionaryCli>();
 
-            var word1 = "pull someone’s leg";
-            var word2 = "at the expense of someone";
-            var word3 = "pencil";
-            var word4 = "pull";
+            //var word1 = "pull someone’s leg";
+            //var word2 = "at the expense of someone";
+            //var word3 = "pencil";
+            //var word4 = "pull";
 
-            var result1 = cambridgeDictionary.GetMeaning(word1);
-            var result2 = cambridgeDictionary.GetMeaning(word2);
-            var result3 = cambridgeDictionary.GetMeaning(word3);
-            var result4 = cambridgeDictionary.GetMeaning(word4);
+            //var result1 = cambridgeDictionary.GetMeaning(word1);
+            //var result2 = cambridgeDictionary.GetMeaning(word2);
+            //var result3 = cambridgeDictionary.GetMeaning(word3);
+            //var result4 = cambridgeDictionary.GetMeaning(word4);
 
-            //var word = "pencil";
-            //var result = cambridgeDictionary.GetMeaning(word);
+            var word = "pencil";
+            var result = cambridgeDictionary.GetMeaning(word);
+
+
+            cambridgeDictionary = new CambridgeDictionaryCli();
+            result = cambridgeDictionary.GetMeaning(word);
         }
     }
 }
