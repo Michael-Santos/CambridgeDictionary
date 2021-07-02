@@ -18,5 +18,18 @@ namespace CambridgeDictionary.Cli
         /// Examples of sentences using the searched word
         /// </summary>
         public IEnumerable<string> Examples { get; set;  }
+
+
+
+
+        /// <summary>
+        /// Searched word
+        /// </summary>
+        public string Word { get; set; }
+
+        /// <summary>
+        /// The set of possible meanings of the word
+        /// </summary>
+        public IEnumerable<Sense> Senses { get; set; }
     }
 }

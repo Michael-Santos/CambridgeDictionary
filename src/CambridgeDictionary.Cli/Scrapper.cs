@@ -192,7 +192,7 @@ namespace CambridgeDictionary.Cli
             return similarWordsNodes.Select(x => x.FirstChild.InnerHtml);
         }
 
-        public Phonetics GetPhonetics(HtmlNode page)
+        public Ipa GetPhonetics(HtmlNode page)
         {
             var ukPhonetics = ExtractPhonetics(page, "uk");
             var usPhonetics = ExtractPhonetics(page, "us");
@@ -202,7 +202,7 @@ namespace CambridgeDictionary.Cli
                 return null;
             }
 
-            return new Phonetics
+            return new Ipa
             {
                 UK = ukPhonetics,
                 US = usPhonetics

@@ -27,7 +27,7 @@ namespace CambridgeDictionary.Cli
             string headlineFormatted = null;
             string wordFromSite = null;
             IEnumerable<string> similarWords = null;
-            Phonetics phonetics = null;
+            Ipa phonetics = null;
 
             var page = _scrapper.GetPage(word);
 

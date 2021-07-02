@@ -14,7 +14,7 @@ namespace CambridgeDictionary.Cli
         /// </summary>
         public string Headline { get; set; }
 
-        public Phonetics Phonetics { get; set; }
+        public Ipa Phonetics { get; set; }
 
         /// <summary>
         /// All the possible meanings with examples and guide word whether it's available

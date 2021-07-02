@@ -2,7 +2,7 @@
 
 namespace CambridgeDictionary.Cli
 {
-    public class Phonetics
+    public class Ipa
     {
         /// <summary>
         /// UK pronounces
