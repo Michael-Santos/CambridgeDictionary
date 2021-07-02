@@ -8,7 +8,7 @@ namespace CambridgeDictionary.Cli
         HtmlNode GetPage(string word);
         string GetHeadline(HtmlNode page);
         string GetWord(HtmlNode page);
-        IEnumerable<EntrySet> GetEntries(HtmlNode page);
+        IEnumerable<EntrySet> GetSenses(HtmlNode page);
         Ipa GetPhonetics(HtmlNode page);
         IEnumerable<string> GetSimilarWords(HtmlNode page);
     }

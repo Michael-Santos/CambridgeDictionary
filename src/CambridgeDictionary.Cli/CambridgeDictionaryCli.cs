@@ -22,7 +22,7 @@ namespace CambridgeDictionary.Cli
             _scrapper = scrapper;
         }
 
-        public Meaning GetMeaning(string word)
+        public Meaning GetEntry(string word)
         {
             string headlineFormatted = null;
             string wordFromSite = null;
@@ -31,7 +31,7 @@ namespace CambridgeDictionary.Cli
 
             var page = _scrapper.GetPage(word);
 
-            var entries = _scrapper.GetEntries(page);
+            var entries = _scrapper.GetSenses(page);
             if (entries != null)
             {
                 word = GetWord(page);

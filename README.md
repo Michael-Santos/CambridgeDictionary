@@ -12,7 +12,7 @@ A simple and consistent lib to query the meaning of words on the Cambridge dicti
 - [x] Phonetics
 
 
-As I had implemented all the basics features but I'm going to enhance the results, performance, and documentation in the next few days to get an alfa version ASAP.
+As I had implemented all the basics features but I'm going to enhance the results, performance, and documentation in the next few days.
 
 # Next Steps
  - [x] Release alfa version

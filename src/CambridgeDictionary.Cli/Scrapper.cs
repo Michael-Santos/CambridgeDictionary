@@ -42,7 +42,7 @@ namespace CambridgeDictionary.Cli
             return node.InnerText;
         }
 
-        public IEnumerable<EntrySet> GetEntries(HtmlNode page)
+        public IEnumerable<EntrySet> GetSenses(HtmlNode page)
         {
             var nodes = page.SelectNodes("//div[@class='pr dictionary']");
 
@@ -51,30 +51,32 @@ namespace CambridgeDictionary.Cli
                 return null;
             }
 
-            var hasMultiplesMeanings = HasMultiplesDefinitions(nodes[0]);
+            var hasMultipleSenses = HasMultipleSenses(nodes[0]);
             
             var entrySet = new List<EntrySet>();
+
+            var senses = new List<Sense>();
             foreach (var node in nodes)
             {
-                if (hasMultiplesMeanings)
+                if (hasMultipleSenses)
                 {
-                    entrySet.AddRange(ExtractMultiplesDefinitionsNode(node));
+                    entrySet.AddRange(ExtractMultipleSenses(node));
                 }
                 else
                 {
-                    entrySet.Add(ExtractSingleDefinitionNode(node));
+                    senses.Add(ExtractSingleSense(node));
                 }
             }
 
             return entrySet;
         }
 
-        private static bool HasMultiplesDefinitions(HtmlNode page)
+        private static bool HasMultipleSenses(HtmlNode page)
         {
             return page.SelectSingleNode("//div[@class='entry']") != null;
         }
 
-        private EntrySet ExtractSingleDefinitionNode(HtmlNode page)
+        private EntrySet ExtractSingleSenseOld(HtmlNode page)
         {
             var entry = new Entry();
             
@@ -89,7 +91,25 @@ namespace CambridgeDictionary.Cli
             return entrySet;
         }
 
-        private IEnumerable<EntrySet> ExtractMultiplesDefinitionsNode(HtmlNode page)
+        private Sense ExtractSingleSense(HtmlNode page)
+        {
+            var definition = new Definition();
+
+            var definitionNode = page.SelectSingleNode("//div[@class='def ddef_d db']");
+            definition.Text = definitionNode.InnerText;
+            definition.Examples = page.SelectNodes("//div[@class='examp dexamp']").Select(x => x.InnerText);
+
+            var definitions = new List<Definition>();
+            definitions.Add(definition);
+
+            var sense = new Sense();
+            sense.Type = "phrasel verb/other";
+            sense.Definitions = definitions;
+
+            return sense;
+        }
+
+        private IEnumerable<EntrySet> ExtractMultipleSenses(HtmlNode page)
         {
             var entrySetList = new List<EntrySet>();
             

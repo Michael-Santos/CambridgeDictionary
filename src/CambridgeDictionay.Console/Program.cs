@@ -26,12 +26,12 @@ namespace CambridgeDictionay.Cli.Test
             //var result3 = cambridgeDictionary.GetMeaning(word3);
             //var result4 = cambridgeDictionary.GetMeaning(word4);
 
-            var word = "pencil";
-            var result = cambridgeDictionary.GetMeaning(word);
+            var word = "at the expense of someone";
+            var result = cambridgeDictionary.GetEntry(word);
 
 
-            cambridgeDictionary = new CambridgeDictionaryCli();
-            result = cambridgeDictionary.GetMeaning(word);
+            //cambridgeDictionary = new CambridgeDictionaryCli();
+            //result = cambridgeDictionary.GetEntry(word);
         }
     }
 }
