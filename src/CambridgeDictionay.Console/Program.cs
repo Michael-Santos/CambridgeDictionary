@@ -2,6 +2,7 @@
 using CambridgeDictionary.Cli.Extensions;
 using CambridgeDictionary.Cli.Test;
 using Microsoft.Extensions.DependencyInjection;
+using System;
 
 namespace CambridgeDictionay.Cli.Test
 {
@@ -28,10 +29,18 @@ namespace CambridgeDictionay.Cli.Test
             //var result4 = cambridgeDictionary.GetMeaning(word4);
 
             var word = "pull";
+            string cachedWord = null;
             //var result = cambridgeDictionary.GetEntry(word);
 
             var cacheManager = new FileCacheManager();
-            var exist = cacheManager.Exists(word);
+            if (!cacheManager.Exists(word))
+            {
+                cacheManager.Write(word, word);
+            }
+
+            cachedWord = cacheManager.Read(word);
+
+            Console.Write(cachedWord);
 
 
 

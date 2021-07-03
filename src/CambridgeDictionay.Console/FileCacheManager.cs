@@ -28,14 +28,12 @@ namespace CambridgeDictionary.Cli.Test
 
         public string Read(string name)
         {
-            string text = null;
-
-            if (!Exists(name))
+            if (Exists(name))
             {
-                 text = File.ReadAllText(GetFilePath(name), Encoding.UTF8);
+                return File.ReadAllText(GetFilePath(name), Encoding.UTF8); ;
             }
 
-            return text;
+            throw new IOException("File was not found");
         }
 
         public void Write(string name, string content)
