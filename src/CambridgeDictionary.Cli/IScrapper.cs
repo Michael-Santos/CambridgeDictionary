@@ -42,6 +42,12 @@ namespace CambridgeDictionary.Cli
         /// <param name="page">Represents the web page</param>
         /// <returns>The phonetics <c>Ipa</c> for the word</returns>
         Ipa GetPhonetics(HtmlNode page);
+
+        /// <summary>
+        /// Get similar words when word has no entries
+        /// </summary>
+        /// <param name="page">Represents the web page</param>
+        /// <returns>The similar words</returns>
         IEnumerable<string> GetSimilarWords(HtmlNode page);
     }
 }
