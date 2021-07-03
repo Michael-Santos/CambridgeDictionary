@@ -2,6 +2,9 @@
 
 namespace CambridgeDictionary.Cli
 {
+    /// <summary>
+    /// Represents an entry in dictionary
+    /// </summary>
     public class Entry
     {
         /// <summary>

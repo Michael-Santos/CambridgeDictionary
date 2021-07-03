@@ -4,6 +4,9 @@ using System.Text;
 
 namespace CambridgeDictionary.Cli
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class CambridgeDictionaryCli : ICambridgeDictionaryCli
     {
         private readonly IScrapper _scrapper;
@@ -22,6 +25,7 @@ namespace CambridgeDictionary.Cli
             _scrapper = scrapper;
         }
 
+        /// <inheritdoc/>
         public EntrySet GetEntry(string word)
         {
             string headword = null;

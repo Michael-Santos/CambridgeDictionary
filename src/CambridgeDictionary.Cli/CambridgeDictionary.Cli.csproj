@@ -19,6 +19,11 @@ For more information: https://github.com/Michael-Santos/CambridgeDictionary</Des
 
  - Method GetMeaning(string word)</PackageReleaseNotes>
     <PackageId>MrBroccoli.CambridgeDictionary.Cli</PackageId>
+    <AssemblyVersion>1.0.1.0</AssemblyVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

@@ -5,9 +5,9 @@ namespace CambridgeDictionary.Cli
     public interface ICambridgeDictionaryCli
     {
         /// <summary>
-        /// Search for the meaning and other information of the word on the dictionary
+        /// Search for entries of the word in dictionary
         /// </summary>
-        /// <param name="word">It's the word to be searched.</param>
+        /// <param name="word">The word to be searched.</param>
         /// <returns>The information about the word on the dictionary</returns>
         EntrySet GetEntry(string word);
     }
