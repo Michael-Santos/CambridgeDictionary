@@ -1,5 +1,5 @@
 # CambridgeDictionary :book::books:
-A simple and consistent lib to query the meaning of words on the [Cambridge dictionary](https://dictionary.cambridge.org/).
+A simple and consistent lib to query the meaning of words in the [Cambridge dictionary](https://dictionary.cambridge.org/).
 
 
 # Dependencies
@@ -16,19 +16,19 @@ As I had implemented all the basics features but I'm going to enhance the result
 
 # Next Steps
  - [x] Release alfa version
- - [?] Setup a simple CI/CD mechanism on Github - (It's only building when something is pushed to master branch at the moment)
+ - [ ] Setup a simple CI/CD mechanism on Github - (It's only building when something is pushed to master branch at the moment)
  - [ ] Unit Tests
 
 
 # Nuget
-The lib is finally available on Nuget: https://www.nuget.org/packages/MrBroccoli.CambridgeDictionary.Cli
+The lib is finally available on Nuget: https://www.nuget.org/packages/MrBroccoli.CambridgeDictionary.Cli.
 
 
 # Setup
 
 ## DI
 
-You can setup the lib in your DI container as follow and then pass the ```ICambridgeDictionaryCli``` interface in the constructor of your services
+You can setup the lib in your DI container as follow and then pass the ```ICambridgeDictionaryCli``` interface in the constructor of your services.
 
 ```C#
 using CambridgeDictionary.Cli.Extensions;
@@ -76,34 +76,62 @@ Currently, the lib only has an method called GetMeaning:
 
 ````C#
 /// <summary>
-/// Search for the meaning and other information of the word on the dictionary
+/// Search for entries of the word in dictionary
 /// </summary>
-/// <param name="word">It's the word to be searched.</param>
+/// <param name="word">The word to be searched.</param>
 /// <returns>The information about the word on the dictionary</returns>
-Meaning GetMeaning(string word);
+EntrySet GetEntry(string word);
 ````
 
 
 # Return
 
-The Meaning response looks like this:
+A EntrySet looks like this:
 
 ```
+EntrySet - Represts a set of entries of the searched word
 {
-    string Word - Word you searched
-    string Headline - The definition fetched from a meta attribute instead of reading all the page
-    IEnumerable<EntrySet> EntrySets - All the possible meanings with examples and guide word whether it's available
-    {
-        string GuideWord - Word that helps you find the right meaning when a word has more than one meaning
-        IEnumerable<Entry> Entries
+    string Headword - Represents the searched word,
+    [
+        Entry - Represents an entry in dictionary
         {
-            string Type - The word class
-            string Definition - The meaning itself
-            IEnumerable<string> Examples - Examples of sentences using the searched word
+            string Type - The word class,
+            IPA - International Phonetic Alphabet, the phonetic transcription of the word's pronunciation
+            {
+               [
+                    string> UK - UK pronounces,
+                    ...
+               ],
+               [
+                    string US - US pronounces,
+                    ...
+               ]
+                
+            },
+            [   
+                Senses - A possible meaning of the word
+                {
+                    string GuideWord - It's a word that helps you find the right meaning when a word has more than one meaning,
+                    [ 
+                        Definitions - A set of definition of the sense of the word
+                        {
+                            string Text - The definition itself,
+                            [
+                                string Examples - Examples of use of the word in the specific definition,
+                                ...
+                            ]
+                        }
+                    ]
+                },
+                ...
+            ],
         }
-    }
-    IEnumerable<string> SimilarWords - Similar words suggestion when the searched word wasn't found
-    string Raw - The raw meaning page
+    ],
+    [
+        string SimilarWords - Similar words sugestion when the searched word wasn't found,
+        ...
+    ],
+    string Raw - The raw meaning page   
 }
 
 ```
@@ -117,5 +145,5 @@ I'm lurking this other two project:
 
 This link help me to understand the dictionary anatomy:
 
- - [Macmillandictionary - Dictionary anatomy](https://www.macmillandictionary.com/learn/dictionary-entry.html)
+ - [Macmillandictionary](https://www.macmillandictionary.com/learn/dictionary-entry.html) - Dictionary anatomy
 
