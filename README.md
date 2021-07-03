@@ -16,6 +16,8 @@ As I had implemented all the basics features but I'm going to enhance the result
 
 # Next Steps
  - [x] Release alfa version
+ - [ ] Add method GetMeaningFromHtmlSource the avoid requests
+ - [ ] Enhence Console Application to create and read \[word\].txt files with the source of the web pages the avoid requests
  - [ ] Setup a simple CI/CD mechanism on Github - (It's only building when something is pushed to master branch at the moment)
  - [ ] Unit Tests
 
