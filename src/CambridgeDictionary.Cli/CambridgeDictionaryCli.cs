@@ -4,9 +4,6 @@ using System.Text;
 
 namespace CambridgeDictionary.Cli
 {
-    /// <summary>
-    /// 
-    /// </summary>
     public class CambridgeDictionaryCli : ICambridgeDictionaryCli
     {
         private readonly IScrapper _scrapper;
@@ -36,7 +33,8 @@ namespace CambridgeDictionary.Cli
             var entries = _scrapper.GetEntries(page);
             if (entries != null)
             {
-                headword = GetWord(page);
+                headword = GetHeadword(page);
+
             }
             else
             {
@@ -52,24 +50,18 @@ namespace CambridgeDictionary.Cli
             };
         }
 
-        private string GetWord(HtmlAgilityPack.HtmlNode page)
+        private string GetHeadword(HtmlAgilityPack.HtmlNode page)
         {
-            var matchedWord = _scrapper.GetWord(page);
+            var matchedWord = _scrapper.GetHeadword(page);
             var formattedWord = FormatWord(matchedWord);
             return formattedWord;
-        }
-
-        private string GetHeadline(HtmlAgilityPack.HtmlNode page)
-        {
-            var headline = _scrapper.GetHeadline(page);
-            var headlineFormatted = FormatHeadline(headline);
-            return headlineFormatted;
         }
 
         private static string FormatHeadline(string headline)
         {
             var definitions = headline.Split("definition: 1. ");
-            if (definitions.Length > 1) {
+            if (definitions.Length > 1)
+            {
                 return definitions[1].Split(" 2. ")[0];
             }
 

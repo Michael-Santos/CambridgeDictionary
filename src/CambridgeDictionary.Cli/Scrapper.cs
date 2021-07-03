@@ -17,12 +17,14 @@ namespace CambridgeDictionary.Cli
             _browser = browser;
         }
 
+        /// <inheritdoc/>
         public HtmlNode GetPage(string word)
         {
             var url = _urlBase + HttpUtility.UrlEncode(word);
             return _browser.NavigateToPage(new Uri(url)).Html;
         }
 
+        /// <inheritdoc/>
         public string GetHeadline(HtmlNode page)
         {
             var node = page.SelectSingleNode("//meta[@itemprop='headline']");
@@ -30,7 +32,8 @@ namespace CambridgeDictionary.Cli
             return HttpUtility.HtmlDecode(contentAttributeValue);
         }
 
-        public string GetWord(HtmlNode page)
+        /// <inheritdoc/>
+        public string GetHeadword(HtmlNode page)
         {
             var node = page.SelectSingleNode("//div[@class='di-title']/span");
 
@@ -42,6 +45,7 @@ namespace CambridgeDictionary.Cli
             return node.InnerText;
         }
 
+        /// <inheritdoc/>
         public IEnumerable<Entry> GetEntries(HtmlNode page)
         {
             var nodes = page.SelectNodes("//div[@class='pr dictionary']");
@@ -178,6 +182,7 @@ namespace CambridgeDictionary.Cli
             return examplesNodes.Select(x => x.InnerText);
         }
 
+        /// <inheritdoc/>
         public IEnumerable<string> GetSimilarWords(HtmlNode page)
         {
             var node = page.Descendants("p")
@@ -193,6 +198,7 @@ namespace CambridgeDictionary.Cli
             return similarWordsNodes.Select(x => x.FirstChild.InnerHtml);
         }
 
+        /// <inheritdoc/>
         public Ipa GetPhonetics(HtmlNode page)
         {
             var ukPhonetics = ExtractPhonetics(page, "uk");
