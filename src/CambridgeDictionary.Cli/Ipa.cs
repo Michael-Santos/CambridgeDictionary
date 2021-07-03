@@ -2,6 +2,9 @@
 
 namespace CambridgeDictionary.Cli
 {
+    /// <summary>
+    /// Represents the International Phonetic Alphabet, the phonetic transcription of the word's pronunciation
+    /// </summary>
     public class Ipa
     {
         /// <summary>

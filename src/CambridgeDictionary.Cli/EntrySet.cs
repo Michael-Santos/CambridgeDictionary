@@ -2,6 +2,9 @@
 
 namespace CambridgeDictionary.Cli
 {
+    /// <summary>
+    /// Represents a set of entries of the searched word
+    /// </summary>
     public class EntrySet
     {
         /// <summary>

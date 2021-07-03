@@ -2,6 +2,9 @@
 
 namespace CambridgeDictionary.Cli
 {
+    /// <summary>
+    /// Represents a sense of the entry fo the word
+    /// </summary>
     public class Sense
     {
         /// <summary>

@@ -2,6 +2,9 @@
 
 namespace CambridgeDictionary.Cli
 {
+    /// <summary>
+    /// Represents a definition of the sense
+    /// </summary>
     public  class Definition
     {
         /// <summary>
