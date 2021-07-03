@@ -2,21 +2,14 @@
 using CambridgeDictionary.Cli.Extensions;
 using CambridgeDictionary.Cli.Test;
 using Microsoft.Extensions.DependencyInjection;
-using System;
 
-namespace CambridgeDictionay.Cli.Test
+namespace CambridgeDictionay.Cli.Debug
 {
     class Program
     {
         static void Main(string[] args)
         {
-            var serviceCollection = new ServiceCollection();
-
-
-            serviceCollection.AddCambridgeDictionary();
-
-            var serviceProvider = serviceCollection.BuildServiceProvider();
-            var cambridgeDictionary = serviceProvider.GetService<ICambridgeDictionaryCli>();
+            
 
             //var word1 = "pull someone’s leg";
             //var word2 = "at the expense of someone";
@@ -29,23 +22,37 @@ namespace CambridgeDictionay.Cli.Test
             //var result4 = cambridgeDictionary.GetMeaning(word4);
 
             var word = "pull";
-            string cachedWord = null;
-            //var result = cambridgeDictionary.GetEntry(word);
-
-            var cacheManager = new FileCacheManager();
-            if (!cacheManager.Exists(word))
-            {
-                cacheManager.Write(word, word);
-            }
-
-            cachedWord = cacheManager.Read(word);
-
-            Console.Write(cachedWord);
+            
 
 
 
             //cambridgeDictionary = new CambridgeDictionaryCli();
             //result = cambridgeDictionary.GetEntry(word);
+        }
+
+
+        private static string Runner(string word)
+        {
+            var cambridgeDictionary = GetCambridgeDicionaryCliInstance();
+
+            var entry = cambridgeDictionary.GetEntry(word);
+            var cacheManager = new FileCacheManager();
+
+            if (!cacheManager.Exists(word))
+            {
+                cacheManager.Write(word, entry.Raw);
+            }
+
+             return cacheManager.Read(word);
+        }
+
+        private static ICambridgeDictionaryCli GetCambridgeDicionaryCliInstance()
+        {
+            var serviceCollection = new ServiceCollection();
+            serviceCollection.AddCambridgeDictionary();
+
+            var serviceProvider = serviceCollection.BuildServiceProvider();
+            return serviceProvider.GetService<ICambridgeDictionaryCli>();
         }
     }
 }
