@@ -29,7 +29,22 @@ namespace CambridgeDictionary.Cli
         {
             var node = page.SelectSingleNode("//meta[@itemprop='headline']");
             var contentAttributeValue = node.GetAttributeValue("content", "");
-            return HttpUtility.HtmlDecode(contentAttributeValue);
+            var headline = HttpUtility.HtmlDecode(contentAttributeValue);
+
+            return headline != null ? FormatHeadline(headline) : null;
+        }
+
+        private static string FormatHeadline(string headline)
+        {
+            var definitions = headline.Split("definition: 1. ");
+            if (definitions.Length > 1)
+            {
+                return definitions[1].Split(" 2. ")[0];
+            }
+
+            definitions = headline.Split("definition: ");
+
+            return definitions[1].Replace(": . Learn more.", "");
         }
 
         /// <inheritdoc/>

@@ -34,7 +34,6 @@ namespace CambridgeDictionary.Cli
             if (entries != null)
             {
                 headword = GetHeadword(page);
-
             }
             else
             {
@@ -55,19 +54,6 @@ namespace CambridgeDictionary.Cli
             var matchedWord = _scrapper.GetHeadword(page);
             var formattedWord = FormatWord(matchedWord);
             return formattedWord;
-        }
-
-        private static string FormatHeadline(string headline)
-        {
-            var definitions = headline.Split("definition: 1. ");
-            if (definitions.Length > 1)
-            {
-                return definitions[1].Split(" 2. ")[0];
-            }
-
-            definitions = headline.Split("definition: ");
-
-            return definitions[1].Replace(": . Learn more.", "");
         }
 
         private static string FormatWord(string word)
