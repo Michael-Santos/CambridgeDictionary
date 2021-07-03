@@ -1,14 +1,17 @@
 ﻿using System.IO;
+using System.Text;
 
 namespace CambridgeDictionary.Cli.Test
 {
     public class FileCacheManager : IFileCacheManager
     {
-        const string basePath = "";
+        private const string CacheFolderName = "Cache";
+        private string _basePath;
 
         public FileCacheManager()
         {
-            
+            _basePath = Path.GetFullPath("../../../" + CacheFolderName);
+            Directory.CreateDirectory(_basePath);
         }
 
         public void Delete(string name)
@@ -17,20 +20,30 @@ namespace CambridgeDictionary.Cli.Test
             {
                 File.Delete(name);
             }
+
+            throw new IOException("File was not found");
         }
 
         public bool Exists(string name) => File.Exists(GetFilePath(name));
 
         public string Read(string name)
         {
-            throw new System.NotImplementedException();
+            string text = null;
+
+            if (!Exists(name))
+            {
+                 text = File.ReadAllText(GetFilePath(name), Encoding.UTF8);
+            }
+
+            return text;
         }
 
         public void Write(string name, string content)
         {
-            throw new System.NotImplementedException();
+
+            File.WriteAllText(GetFilePath(name), content, Encoding.UTF8);
         }
 
-        private string GetFilePath(string name) => Path.Combine(basePath, name);
+        private string GetFilePath(string name) => Path.Combine(_basePath, name);
     }
 }
