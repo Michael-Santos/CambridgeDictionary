@@ -30,7 +30,7 @@ namespace CambridgeDictionary.Cli
         }
 
         /// <inheritdoc/>
-        public EntrySet GetMeaningFromHtmlSource(string htmlSource)
+        public EntrySet GetEntryFromHtmlSource(string htmlSource)
         {
             var htmlNode = _scrapper.LoadFromHtmlSource(htmlSource);
             return GetEntryBase(null, htmlNode);

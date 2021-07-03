@@ -35,7 +35,7 @@ namespace CambridgeDictionay.Cli.Debug
             }
 
             var cachedPage = cacheManager.Read(word);
-            return cambridgeDictionary.GetMeaningFromHtmlSource(cachedPage);
+            return cambridgeDictionary.GetEntryFromHtmlSource(cachedPage);
         }
 
         private static ICambridgeDictionaryCli GetCambridgeDicionaryCliInstance()

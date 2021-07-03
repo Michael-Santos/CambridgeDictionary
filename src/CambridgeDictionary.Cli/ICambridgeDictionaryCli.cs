@@ -12,10 +12,10 @@ namespace CambridgeDictionary.Cli
         EntrySet GetEntry(string word);
 
         /// <summary>
-        /// Fetch the entries of the word in dictionary directly from source file
+        /// Fetch the entries of the word in dictionary directly from a html source
         /// </summary>
-        /// <param name="htmlSource"></param>
+        /// <param name="htmlSource">The source file</param>
         /// <returns>The information about the word on the dictionary</returns>
-        EntrySet GetMeaningFromHtmlSource(string htmlSource);
+        EntrySet GetEntryFromHtmlSource(string htmlSource);
     }
 }
