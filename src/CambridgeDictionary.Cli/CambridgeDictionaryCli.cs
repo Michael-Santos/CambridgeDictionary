@@ -33,7 +33,7 @@ namespace CambridgeDictionary.Cli
             var entries = _scrapper.GetEntries(page);
             if (entries != null)
             {
-                headword = GetHeadword(page);
+                headword = _scrapper.GetHeadword(page);
             }
             else
             {
@@ -47,19 +47,6 @@ namespace CambridgeDictionary.Cli
                 SimilarWords = similarWords,
                 Raw = page.InnerHtml
             };
-        }
-
-        private string GetHeadword(HtmlAgilityPack.HtmlNode page)
-        {
-            var matchedWord = _scrapper.GetHeadword(page);
-            var formattedWord = FormatWord(matchedWord);
-            return formattedWord;
-        }
-
-        private static string FormatWord(string word)
-        {
-            word = word.Replace("\"", "");
-            return word;
-        }
+        }        
     }
 }

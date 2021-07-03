@@ -57,7 +57,16 @@ namespace CambridgeDictionary.Cli
                 node = page.SelectSingleNode("//div[@class='di-title']/h2/b");
             }
 
-            return node.InnerText;
+            var headword = node?.InnerText;
+
+            
+            return headword != null ? FormatWord(headword) : null;
+        }
+
+        private static string FormatWord(string word)
+        {
+            word = word.Replace("\"", "");
+            return word;
         }
 
         /// <inheritdoc/>
