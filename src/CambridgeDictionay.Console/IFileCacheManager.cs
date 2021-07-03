@@ -1,8 +1,7 @@
 ﻿namespace CambridgeDictionary.Cli.Test
 {
-    public interface IFileManager
+    public interface IFileCacheManager
     {
-        public void Create(string name);
         public void Delete(string name);
         public bool Exists(string name);
         public string Read(string name);
