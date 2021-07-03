@@ -6,7 +6,7 @@ namespace CambridgeDictionary.Cli.Test
     public class FileCacheManager : IFileCacheManager
     {
         private const string CacheFolderName = "Cache";
-        private string _basePath;
+        private readonly string _basePath;
 
         public FileCacheManager()
         {

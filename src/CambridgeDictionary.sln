@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.31321.278
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CambridgeDictionary.Cli", "CambridgeDictionary.Cli\CambridgeDictionary.Cli.csproj", "{FAC344EE-32EE-4DC9-8B12-35E9EE0C92AB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CambridgeDictionary.Cli.Test", "CambridgeDictionay.Console\CambridgeDictionary.Cli.Test.csproj", "{47CA9AE8-BC4B-4102-94E6-4C38493E817B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CambridgeDictionary.Cli.Debug", "CambridgeDictionay.Console\CambridgeDictionary.Cli.Debug.csproj", "{47CA9AE8-BC4B-4102-94E6-4C38493E817B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

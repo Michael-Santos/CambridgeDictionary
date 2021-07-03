@@ -16,6 +16,13 @@ namespace CambridgeDictionary.Cli
         HtmlNode GetPage(string word);
 
         /// <summary>
+        /// Load page from html source
+        /// </summary>
+        /// <param name="htmlSource">The html source</param>
+        /// <returns>The <c>HtmlNode</c> that allows you navigate throghout the page</returns>
+        HtmlNode LoadFromHtmlSource(string htmlSource);
+
+        /// <summary>
         /// Get the headline from web page
         /// </summary>
         /// <param name="page">Represents the web page</param>

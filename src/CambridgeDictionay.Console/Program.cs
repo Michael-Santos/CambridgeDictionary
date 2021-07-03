@@ -9,29 +9,19 @@ namespace CambridgeDictionay.Cli.Debug
     {
         static void Main(string[] args)
         {
-            
+            var word1 = "pull someone’s leg";
+            var word2 = "at the expense of someone";
+            var word3 = "pencil";
+            var word4 = "pull";
 
-            //var word1 = "pull someone’s leg";
-            //var word2 = "at the expense of someone";
-            //var word3 = "pencil";
-            //var word4 = "pull";
-
-            //var result1 = cambridgeDictionary.GetMeaning(word1);
-            //var result2 = cambridgeDictionary.GetMeaning(word2);
-            //var result3 = cambridgeDictionary.GetMeaning(word3);
-            //var result4 = cambridgeDictionary.GetMeaning(word4);
-
-            var word = "pull";
-            
-
-
-
-            //cambridgeDictionary = new CambridgeDictionaryCli();
-            //result = cambridgeDictionary.GetEntry(word);
+            var result1 = Runner(word1);
+            var result2 = Runner(word2);
+            var result3 = Runner(word3);
+            var result4 = Runner(word4);
         }
 
 
-        private static string Runner(string word)
+        private static EntrySet Runner(string word)
         {
             var cambridgeDictionary = GetCambridgeDicionaryCliInstance();
 
@@ -41,9 +31,11 @@ namespace CambridgeDictionay.Cli.Debug
             if (!cacheManager.Exists(word))
             {
                 cacheManager.Write(word, entry.Raw);
+                return entry;
             }
 
-             return cacheManager.Read(word);
+            var cachedPage = cacheManager.Read(word);
+            return cambridgeDictionary.GetMeaningFromHtmlSource(cachedPage);
         }
 
         private static ICambridgeDictionaryCli GetCambridgeDicionaryCliInstance()

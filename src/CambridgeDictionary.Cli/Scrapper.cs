@@ -25,6 +25,14 @@ namespace CambridgeDictionary.Cli
         }
 
         /// <inheritdoc/>
+        public HtmlNode LoadFromHtmlSource(string htmlSource)
+        {
+            var htmlDocument = new HtmlDocument();
+            htmlDocument.LoadHtml(htmlSource);
+            return htmlDocument.DocumentNode;
+        }
+
+        /// <inheritdoc/>
         public string GetHeadline(HtmlNode page)
         {
             var node = page.SelectSingleNode("//meta[@itemprop='headline']");

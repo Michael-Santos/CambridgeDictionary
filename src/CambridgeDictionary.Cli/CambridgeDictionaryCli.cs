@@ -25,10 +25,21 @@ namespace CambridgeDictionary.Cli
         /// <inheritdoc/>
         public EntrySet GetEntry(string word)
         {
+            var page = _scrapper.GetPage(word);
+            return GetEntryBase(word, page);
+        }
+
+        /// <inheritdoc/>
+        public EntrySet GetMeaningFromHtmlSource(string htmlSource)
+        {
+            var htmlNode = _scrapper.LoadFromHtmlSource(htmlSource);
+            return GetEntryBase(null, htmlNode);
+        }
+
+        private EntrySet GetEntryBase(string word, HtmlAgilityPack.HtmlNode page)
+        {
             string headword = null;
             IEnumerable<string> similarWords = null;
-
-            var page = _scrapper.GetPage(word);
 
             var entries = _scrapper.GetEntries(page);
             if (entries != null)
@@ -47,6 +58,6 @@ namespace CambridgeDictionary.Cli
                 SimilarWords = similarWords,
                 Raw = page.InnerHtml
             };
-        }        
+        }
     }
 }
