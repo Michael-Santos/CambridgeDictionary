@@ -16,8 +16,8 @@ As I had implemented all the basics features but I'm going to enhance the result
 
 # Next Steps
  - [x] Release alfa version
- - [ ] Add method GetMeaningFromHtmlSource the avoid requests
- - [ ] Enhence Console Application to create and read \[word\].txt files with the source of the web pages the avoid requests
+ - [x] Add method GetMeaningFromHtmlSource the avoid requests (Development utility)
+ - [x] Enhence Debug Application to create and read \[word\].txt files with the source of the web pages the avoid requests (Development utility)
  - [ ] Setup a simple CI/CD mechanism on Github - (It's only building when something is pushed to master branch at the moment)
  - [ ] Unit Tests
 
@@ -74,7 +74,7 @@ var cambridgeDictionary = new CambridgeDictionaryCli();
 
 # Usage
 
-Currently, the lib only has an method called GetMeaning:
+Currently, the lib has the two methods as follow:
 
 ````C#
 /// <summary>
@@ -83,6 +83,13 @@ Currently, the lib only has an method called GetMeaning:
 /// <param name="word">The word to be searched.</param>
 /// <returns>The information about the word on the dictionary</returns>
 EntrySet GetEntry(string word);
+
+/// <summary>
+/// Fetch the entries of the word in dictionary directly from a html source
+/// </summary>
+/// <param name="htmlSource">The html source</param>
+/// <returns>The information about the word on the dictionary</returns>
+EntrySet GetEntryFromHtmlSource(string htmlSource);
 ````
 
 
@@ -137,6 +144,12 @@ EntrySet - Represts a set of entries of the searched word
 }
 
 ```
+
+# Debug Tools
+
+## Runner
+
+Text's still in development
 
 
 # Links
