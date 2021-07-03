@@ -39,12 +39,14 @@ namespace CambridgeDictionary.Cli
         private EntrySet GetEntryBase(string word, HtmlAgilityPack.HtmlNode page)
         {
             string headword = null;
+            string headline = null;
             IEnumerable<string> similarWords = null;
 
             var entries = _scrapper.GetEntries(page);
             if (entries != null)
             {
                 headword = _scrapper.GetHeadword(page);
+                headline = _scrapper.GetHeadline(page);
             }
             else
             {
@@ -54,6 +56,7 @@ namespace CambridgeDictionary.Cli
             return new EntrySet
             {
                 Headword = headword ?? word,
+                Headline = headline,
                 Entries = entries,
                 SimilarWords = similarWords,
                 Raw = page.InnerHtml

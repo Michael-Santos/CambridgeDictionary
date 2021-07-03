@@ -101,6 +101,7 @@ A EntrySet looks like this:
 EntrySet - Represts a set of entries of the searched word
 {
     string Headword - Represents the searched word,
+    string Headline - Small definition fetched from metatag from web page
     [
         Entry - Represents an entry in dictionary
         {

@@ -13,6 +13,11 @@ namespace CambridgeDictionary.Cli
         public string Headword { get; set; }
 
         /// <summary>
+        /// Small definition fetched from metatag from web page
+        /// </summary>
+        public string Headline { get; set; }
+
+        /// <summary>
         /// Entries of the word found in the dictionary
         /// </summary>
         public IEnumerable<Entry> Entries { get; set; }

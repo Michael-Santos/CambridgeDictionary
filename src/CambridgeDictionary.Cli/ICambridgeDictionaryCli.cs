@@ -14,7 +14,7 @@ namespace CambridgeDictionary.Cli
         /// <summary>
         /// Fetch the entries of the word in dictionary directly from a html source
         /// </summary>
-        /// <param name="htmlSource">The source file</param>
+        /// <param name="htmlSource">The html source</param>
         /// <returns>The information about the word on the dictionary</returns>
         EntrySet GetEntryFromHtmlSource(string htmlSource);
     }
