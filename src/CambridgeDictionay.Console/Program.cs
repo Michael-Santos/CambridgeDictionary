@@ -65,8 +65,6 @@ namespace CambridgeDictionay.Cli.Debug
 
         private static List<EntrySet> RunTest()
         {
-            var cambridgeDictionary = GetCambridgeDictionaryCliInstance();
-
             var word1 = "pull";
             var word2 = "at the expense of someone";
             var word3 = "pencil";
