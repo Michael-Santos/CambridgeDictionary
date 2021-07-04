@@ -8,7 +8,7 @@
     <NeutralLanguage>en-US</NeutralLanguage>
     <ApplicationIcon />
     <StartupObject />
-    <Version>1.1.1</Version>
+    <Version>1.2.0</Version>
     <RepositoryType>git</RepositoryType>
     <PackageTags>Cli, Dictionary, English, Scrapper</PackageTags>
     <PackageProjectUrl>https://github.com/Michael-Santos/CambridgeDictionary</PackageProjectUrl>
@@ -18,8 +18,8 @@ For more information: https://github.com/Michael-Santos/CambridgeDictionary</Des
     <PackageReleaseNotes>New Features
  - Added exception ServiceUnreachableException</PackageReleaseNotes>
     <PackageId>MrBroccoli.CambridgeDictionary.Cli</PackageId>
-    <AssemblyVersion>1.1.1.0</AssemblyVersion>
-    <FileVersion>1.1.1.0</FileVersion>
+    <AssemblyVersion>1.2.0.0</AssemblyVersion>
+    <FileVersion>1.2.0.0</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
