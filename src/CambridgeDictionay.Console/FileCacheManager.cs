@@ -30,7 +30,7 @@ namespace CambridgeDictionary.Cli.Test
         {
             if (Exists(name))
             {
-                return File.ReadAllText(GetFilePath(name), Encoding.UTF8); ;
+                return File.ReadAllText(GetFilePath(name), Encoding.UTF8);
             }
 
             throw new IOException("File was not found");

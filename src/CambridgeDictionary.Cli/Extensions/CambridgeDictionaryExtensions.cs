@@ -15,7 +15,7 @@ namespace CambridgeDictionary.Cli.Extensions
             services.AddScoped<IScrapper, Scrapper>();
             services.AddScoped(x => new ScrapingBrowser()
             {
-                Encoding = Encoding.UTF8
+                Encoding = Encoding.UTF8,
             });
 
             return services;
