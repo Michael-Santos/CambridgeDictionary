@@ -74,6 +74,8 @@ var cambridgeDictionary = new CambridgeDictionaryCli();
 
 # Usage
 
+## Methods
+
 Currently, the lib has the two methods as follow:
 
 ````C#
@@ -93,7 +95,7 @@ EntrySet GetEntryFromHtmlSource(string htmlSource);
 ````
 
 
-# Return
+## Return
 
 A EntrySet looks like this:
 
@@ -146,7 +148,13 @@ EntrySet - Represts a set of entries of the searched word
 
 ```
 
-# Debug Tools
+
+## Exceptions
+
+```ServiceUnreachable``` - It's thrown when it wasn't possible to reach the Cambridge site
+
+
+# Debug Tools (For this project)
 
 ## Runner
 

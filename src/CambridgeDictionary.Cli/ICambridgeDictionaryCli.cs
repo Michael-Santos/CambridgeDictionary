@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using CambridgeDictionary.Cli.Exceptions;
 
 namespace CambridgeDictionary.Cli
 {
@@ -9,6 +9,7 @@ namespace CambridgeDictionary.Cli
         /// </summary>
         /// <param name="word">The word to be searched.</param>
         /// <returns>The information about the word on the dictionary</returns>
+        /// <exception cref="ServiceUnreachableException">Thrown when it wasn't possible to reach the cambridge site</exception>
         EntrySet GetEntry(string word);
 
         /// <summary>

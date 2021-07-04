@@ -29,7 +29,7 @@ namespace CambridgeDictionary.Cli
             catch(AggregateException ex)
             {
                 Console.Write(ex.Message);
-                throw new ServiceUnreachable("It wasn't possible to reach the web page. Try it later", ex);
+                throw new ServiceUnreachableException("It wasn't possible to reach the web page. Try it later", ex);
             }
         }
 
