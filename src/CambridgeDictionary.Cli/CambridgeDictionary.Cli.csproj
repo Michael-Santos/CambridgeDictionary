@@ -8,7 +8,7 @@
     <NeutralLanguage>en-US</NeutralLanguage>
     <ApplicationIcon />
     <StartupObject />
-    <Version>1.1.0-alpha</Version>
+    <Version>1.1.1</Version>
     <RepositoryType>git</RepositoryType>
     <PackageTags>Cli, Dictionary, English, Scrapper</PackageTags>
     <PackageProjectUrl>https://github.com/Michael-Santos/CambridgeDictionary</PackageProjectUrl>
@@ -16,16 +16,10 @@
 For more information: https://github.com/Michael-Santos/CambridgeDictionary</Description>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageReleaseNotes>New Features
- - It's no longer necessary to instantiate a ServiceCollection to use the lib
- - Added GetEntryFromHtmlSource
-
-Bugfixes
- - Guide Word no longer presents many spaces at the beginning and the end
-
-Breaking Changes
- - Meaning modeling was re-elaborated and changed to EntrySet</PackageReleaseNotes>
+ - Added exception ServiceUnreachableException</PackageReleaseNotes>
     <PackageId>MrBroccoli.CambridgeDictionary.Cli</PackageId>
-    <AssemblyVersion>1.1.0.0</AssemblyVersion>
+    <AssemblyVersion>1.1.1.0</AssemblyVersion>
+    <FileVersion>1.1.1.0</FileVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
