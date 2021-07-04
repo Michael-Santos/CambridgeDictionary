@@ -1,8 +1,20 @@
-﻿namespace CambridgeDictionary.Cli.Exceptions
+﻿using System;
+using System.Runtime.Serialization;
+
+namespace CambridgeDictionary.Cli.Exceptions
 {
-    public class CambridgeDictionaryException
+    public class CambridgeDictionaryException : Exception
     {
-        public string Message { get; set; } = "This is a generic exception message";
-        public string Details { get; set; } = "This is a generic exception detail";
+        public CambridgeDictionaryException()
+        {
+        }
+
+        public CambridgeDictionaryException(string message) : base(message)
+        {
+        }
+
+        public CambridgeDictionaryException(string message, Exception innerException) : base(message, innerException)
+        {
+        }
     }
 }

@@ -8,18 +8,24 @@
     <NeutralLanguage>en-US</NeutralLanguage>
     <ApplicationIcon />
     <StartupObject />
-    <Version>1.0.1-alpha</Version>
+    <Version>1.1.0-alpha</Version>
     <RepositoryType>git</RepositoryType>
     <PackageTags>Cli, Dictionary, English, Scrapper</PackageTags>
     <PackageProjectUrl>https://github.com/Michael-Santos/CambridgeDictionary</PackageProjectUrl>
-    <Description>Simple and consistent lib to query the meaning of words on the Cambridge dictionary
+    <Description>Simple and consistent lib to query the meaning of words in the Cambridge dictionary
 For more information: https://github.com/Michael-Santos/CambridgeDictionary</Description>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageReleaseNotes>New Features
+ - It's no longer necessary to instantiate a ServiceCollection to use the lib
+ - Added GetEntryFromHtmlSource
 
- - Method GetMeaning(string word)</PackageReleaseNotes>
+Bugfixes
+ - Guide Word no longer presents many spaces at the beginning and the end
+
+Breaking Changes
+ - Meaning modeling was re-elaborated and changed to EntrySet</PackageReleaseNotes>
     <PackageId>MrBroccoli.CambridgeDictionary.Cli</PackageId>
-    <AssemblyVersion>1.0.1.0</AssemblyVersion>
+    <AssemblyVersion>1.1.0.0</AssemblyVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">

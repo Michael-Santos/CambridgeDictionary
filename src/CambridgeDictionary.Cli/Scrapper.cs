@@ -1,4 +1,5 @@
-﻿using HtmlAgilityPack;
+﻿using CambridgeDictionary.Cli.Exceptions;
+using HtmlAgilityPack;
 using ScrapySharp.Network;
 using System;
 using System.Collections.Generic;
@@ -20,8 +21,16 @@ namespace CambridgeDictionary.Cli
         /// <inheritdoc/>
         public HtmlNode GetPage(string word)
         {
-            var url = _urlBase + HttpUtility.UrlEncode(word);
-            return _browser.NavigateToPage(new Uri(url)).Html;
+            try
+            {
+                var url = _urlBase + HttpUtility.UrlEncode(word);
+                return _browser.NavigateToPage(new Uri(url)).Html;
+            }
+            catch(AggregateException ex)
+            {
+                Console.Write(ex.Message);
+                throw new ServiceUnreachable("It wasn't possible to reach the web page. Try it later", ex);
+            }
         }
 
         /// <inheritdoc/>
