@@ -151,7 +151,7 @@ EntrySet - Represts a set of entries of the searched word
 
 ## Exceptions
 
-```ServiceUnreachable``` - It's thrown when it wasn't possible to reach the Cambridge site
+```ServiceUnreachableExacption``` - It's thrown when it wasn't possible to reach the Cambridge site
 
 
 # Debug Tools (For this project)
