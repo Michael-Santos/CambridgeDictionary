@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using ScrapySharp.Network;
+using System.Net.Cache;
 using System.Text;
 
 namespace CambridgeDictionary.Cli.Extensions
@@ -8,6 +9,9 @@ namespace CambridgeDictionary.Cli.Extensions
     {
         public static IServiceCollection AddCambridgeDictionary(this IServiceCollection services)
         {
+            var policy =
+                new RequestCachePolicy(RequestCacheLevel.NoCacheNoStore);
+
             services.AddScoped<ICambridgeDictionaryCli, CambridgeDictionaryCli>(serviceProvider => {
                 var dependency = serviceProvider.GetRequiredService<IScrapper>();
                 return new CambridgeDictionaryCli(dependency);
@@ -16,6 +20,7 @@ namespace CambridgeDictionary.Cli.Extensions
             services.AddScoped(x => new ScrapingBrowser()
             {
                 Encoding = Encoding.UTF8,
+                CachePolicy = policy
             });
 
             return services;

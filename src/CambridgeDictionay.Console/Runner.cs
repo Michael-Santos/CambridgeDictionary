@@ -43,7 +43,10 @@ namespace CambridgeDictionary.Cli.Debug
 
             foreach (string word in words)
             {
+                //Console.WriteLine("Memory used before execution:       {0:N0}",
+                //        GC.GetTotalMemory(false));
                 entries.Add(Run(word));
+                //GC.Collect();
             }
 
             return entries;
