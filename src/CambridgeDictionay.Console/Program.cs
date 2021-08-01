@@ -8,7 +8,7 @@ namespace CambridgeDictionay.Cli.Debug
         {
             var runner = new Runner();
             //var result = runner.RunRange("word", "one step", "rola", "test", "get moody", "willing up", "word", "one step", "rola", "test", "get moody", "willing up", "word", "one step", "rola", "test", "get moody", "willing up", "word", "one step", "rola", "test", "get moody", "willing up", "word", "one step", "rola", "test", "get moody", "willing up", "word", "one step", "rola", "test", "get moody", "willing up", "word", "one step", "rola", "test", "get moody", "willing up", "word", "one step", "rola", "test", "get moody", "willing up", "word", "one step", "rola", "test", "get moody", "willing up", "word", "one step", "rola", "test", "get moody", "willing up", "word", "one step", "rola", "test", "get moody", "willing up", "word", "one step", "rola", "test", "get moody", "willing up", "word", "one step", "rola", "test", "get moody", "willing up", "word", "one step", "rola", "test", "get moody", "willing up", "word", "one step", "rola", "test", "get moody", "willing up", "word", "one step", "rola", "test", "get moody", "willing up");
-            var result = runner.RunRange("Hello");
+            var result = runner.RunRange("hello");
         }
     }
 }

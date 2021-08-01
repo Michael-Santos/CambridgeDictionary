@@ -163,9 +163,9 @@ namespace CambridgeDictionary.Cli
         {
             var typeNode = node.Descendants()
                     .Where(x => x.HasClass("pos") && x.HasClass("dpos"))
-                    .First();
+                    .Select(x => x.InnerText);
 
-            return typeNode.InnerText;
+            return string.Join(",", typeNode);
         }
 
         private string ExtractGuideWord(HtmlNode node)
